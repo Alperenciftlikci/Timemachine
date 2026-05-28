@@ -237,6 +237,15 @@
       color: var(--bg);
       margin-bottom: 18px;
     }
+    .feature-image {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      background-size: cover;
+      background-position: center;
+      border-radius: 14px;
+      margin-bottom: 18px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    }
     .feature h3 {
       font-size: 19px; font-weight: 700;
       margin-bottom: 8px;
@@ -255,15 +264,33 @@
     .era-strip::-webkit-scrollbar { display: none; }
     .era-card {
       flex: 0 0 160px;
-      height: 220px;
+      height: 240px;
       border-radius: 18px;
-      padding: 18px;
-      display: flex; flex-direction: column; justify-content: flex-end;
+      position: relative;
+      overflow: hidden;
       color: white;
       font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.3s;
     }
-    .era-card .year { font-size: 11px; opacity: 0.8; letter-spacing: 1.2px; }
-    .era-card .name { font-size: 17px; }
+    .era-card:hover { transform: translateY(-4px); }
+    .era-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.85) 100%);
+    }
+    .era-text {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 14px;
+    }
+    .era-card .year {
+      font-size: 11px; opacity: 0.85; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--gold);
+      text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    }
+    .era-card .name {
+      font-size: 17px;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+    }
 
     /* HOW IT WORKS */
     .how-steps {
@@ -378,12 +405,12 @@
 
       <div class="phone-mockup" aria-hidden="true">
         <div class="phone-screen">
-          <div class="ps-hero">⌛</div>
+          <div class="ps-hero" style="background-image:url('images/featured_aging.webp');background-size:cover;background-position:center;"></div>
           <div class="ps-grid">
-            <div class="ps-tile">🏛️</div>
-            <div class="ps-tile">🤠</div>
-            <div class="ps-tile">🚀</div>
-            <div class="ps-tile">📷</div>
+            <div class="ps-tile" style="background-image:url('images/ancient_egypt_pharaoh_16_9.webp');background-size:cover;background-position:center;"></div>
+            <div class="ps-tile" style="background-image:url('images/samurai_16_9.webp');background-size:cover;background-position:center;"></div>
+            <div class="ps-tile" style="background-image:url('images/cyberpunk_2099_16_9.webp');background-size:cover;background-position:center;"></div>
+            <div class="ps-tile" style="background-image:url('images/viking_warrior_16_9.webp');background-size:cover;background-position:center;"></div>
           </div>
         </div>
       </div>
@@ -401,32 +428,32 @@
 
       <div class="features">
         <div class="feature">
-          <div class="feature-icon">⌛</div>
+          <div class="feature-image" style="background-image:url('images/collection_age.webp');"></div>
           <h3>Aging Journey</h3>
           <p>See yourself at every life stage from baby to centenarian — and watch the transformation as a video.</p>
         </div>
         <div class="feature">
-          <div class="feature-icon">🏛️</div>
+          <div class="feature-image" style="background-image:url('images/collection_history.webp');"></div>
           <h3>Historical Eras</h3>
           <p>Live as a pharaoh, gladiator, Viking, samurai, Victorian, or Wild West outlaw. 30+ historical roles.</p>
         </div>
         <div class="feature">
-          <div class="feature-icon">🚀</div>
+          <div class="feature-image" style="background-image:url('images/collection_future.webp');"></div>
           <h3>Future Worlds</h3>
           <p>Cyberpunk 2099, Mars colonist, post-apocalyptic survivor, or utopian citizen of year 3000.</p>
         </div>
         <div class="feature">
-          <div class="feature-icon">🎬</div>
+          <div class="feature-image" style="background-image:url('images/collection_video.webp');"></div>
           <h3>Cinematic Videos</h3>
           <p>Aging timelapses, decade transitions, "message from your future self" — videos built to share.</p>
         </div>
         <div class="feature">
-          <div class="feature-icon">📷</div>
+          <div class="feature-image" style="background-image:url('images/collection_vintage.webp');"></div>
           <h3>Vintage Photo Styles</h3>
           <p>1850s daguerreotype, 1920s sepia, 90s yearbook, 80s mall glamour shot. Pure nostalgia.</p>
         </div>
         <div class="feature">
-          <div class="feature-icon">❤️</div>
+          <div class="feature-image" style="background-image:url('images/collection_family.webp');"></div>
           <h3>Family & Love</h3>
           <p>You and your partner aging together. Future baby. Three generations side-by-side. Even your pet through time.</p>
         </div>
@@ -444,18 +471,18 @@
       </div>
 
       <div class="era-strip">
-        <div class="era-card" style="background: linear-gradient(180deg, #D9A943, #5C3F12);"><div class="year">1300 BCE</div><div class="name">Ancient Egypt</div></div>
-        <div class="era-card" style="background: linear-gradient(180deg, #B5905D, #3F2418);"><div class="year">50 BCE</div><div class="name">Roma</div></div>
-        <div class="era-card" style="background: linear-gradient(180deg, #758090, #2E3848);"><div class="year">900 CE</div><div class="name">Viking</div></div>
-        <div class="era-card" style="background: linear-gradient(180deg, #B23B3B, #4A1414);"><div class="year">1600</div><div class="name">Samurai</div></div>
-        <div class="era-card" style="background: linear-gradient(180deg, #8A6680, #2F1A28);"><div class="year">1885</div><div class="name">Victorian</div></div>
-        <div class="era-card" style="background: linear-gradient(180deg, #CC7F45, #5A2618);"><div class="year">1875</div><div class="name">Wild West</div></div>
-        <div class="era-card" style="background: linear-gradient(180deg, #B58D48, #3F2418);"><div class="year">1925</div><div class="name">1920s Gatsby</div></div>
-        <div class="era-card" style="background: linear-gradient(180deg, #E04AA0, #4A1A4A);"><div class="year">1975</div><div class="name">70s Disco</div></div>
-        <div class="era-card" style="background: linear-gradient(180deg, #E84A99, #2F50D6);"><div class="year">1985</div><div class="name">80s Neon</div></div>
-        <div class="era-card" style="background: linear-gradient(180deg, #4ECFD3, #1E2E70);"><div class="year">2099</div><div class="name">Cyberpunk</div></div>
-        <div class="era-card" style="background: linear-gradient(180deg, #D97045, #5A2118);"><div class="year">2090</div><div class="name">Mars</div></div>
-        <div class="era-card" style="background: linear-gradient(180deg, #7ED2F0, #2F6A90);"><div class="year">3000</div><div class="name">Utopia</div></div>
+        <div class="era-card" style="background-image:url('images/time_egypt.webp');background-size:cover;background-position:center;"><div class="era-overlay"></div><div class="era-text"><div class="year">1300 BCE</div><div class="name">Ancient Egypt</div></div></div>
+        <div class="era-card" style="background-image:url('images/time_rome.webp');background-size:cover;background-position:center;"><div class="era-overlay"></div><div class="era-text"><div class="year">50 BCE</div><div class="name">Roma</div></div></div>
+        <div class="era-card" style="background-image:url('images/time_viking.webp');background-size:cover;background-position:center;"><div class="era-overlay"></div><div class="era-text"><div class="year">900 CE</div><div class="name">Viking</div></div></div>
+        <div class="era-card" style="background-image:url('images/time_samurai.webp');background-size:cover;background-position:center;"><div class="era-overlay"></div><div class="era-text"><div class="year">1600</div><div class="name">Samurai</div></div></div>
+        <div class="era-card" style="background-image:url('images/time_victorian.webp');background-size:cover;background-position:center;"><div class="era-overlay"></div><div class="era-text"><div class="year">1885</div><div class="name">Victorian</div></div></div>
+        <div class="era-card" style="background-image:url('images/time_wildwest.webp');background-size:cover;background-position:center;"><div class="era-overlay"></div><div class="era-text"><div class="year">1875</div><div class="name">Wild West</div></div></div>
+        <div class="era-card" style="background-image:url('images/time_1920s.webp');background-size:cover;background-position:center;"><div class="era-overlay"></div><div class="era-text"><div class="year">1925</div><div class="name">1920s Gatsby</div></div></div>
+        <div class="era-card" style="background-image:url('images/time_1970s.webp');background-size:cover;background-position:center;"><div class="era-overlay"></div><div class="era-text"><div class="year">1975</div><div class="name">70s Disco</div></div></div>
+        <div class="era-card" style="background-image:url('images/time_1980s.webp');background-size:cover;background-position:center;"><div class="era-overlay"></div><div class="era-text"><div class="year">1985</div><div class="name">80s Neon</div></div></div>
+        <div class="era-card" style="background-image:url('images/time_cyberpunk.webp');background-size:cover;background-position:center;"><div class="era-overlay"></div><div class="era-text"><div class="year">2099</div><div class="name">Cyberpunk</div></div></div>
+        <div class="era-card" style="background-image:url('images/time_mars.webp');background-size:cover;background-position:center;"><div class="era-overlay"></div><div class="era-text"><div class="year">2090</div><div class="name">Mars</div></div></div>
+        <div class="era-card" style="background-image:url('images/time_y3000.webp');background-size:cover;background-position:center;"><div class="era-overlay"></div><div class="era-text"><div class="year">3000</div><div class="name">Utopia</div></div></div>
       </div>
     </div>
   </section>
