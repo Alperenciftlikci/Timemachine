@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="theme-color" content="#0F0A08" />
+  <title>AI Time Machine — Travel Through Time With Your Photos</title>
+  <meta name="description" content="AI Time Machine transforms your face across centuries — from Ancient Egypt to Cyberpunk 2099. Cinematic AI photos and viral aging videos." />
+  <meta property="og:title" content="AI Time Machine" />
+  <meta property="og:description" content="Travel through time. See yourself across centuries and watch yourself age — all from one photo." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://alperenciftlikci.github.io/aitimemachine-website/og-image.png" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='75' font-size='80'%3E%E2%8C%9B%3C/text%3E%3C/svg%3E" />
+  <style>
+    :root {
+      --bg: #0F0A08;
+      --bg-2: #1E1612;
+      --bg-3: #2A201B;
+      --gold: #C9A961;
+      --gold-light: #E8C073;
+      --rose: #D4756B;
+      --cyan: #6BD4DA;
+      --cream: #F4ECD8;
+      --text: #F4ECD8;
+      --text-2: #B5A58E;
+      --text-3: #807262;
+      --divider: #3A2D24;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    .container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      background: rgba(15, 10, 8, 0.7);
+      border-bottom: 1px solid var(--divider);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 24px;
+      max-width: 1140px; margin: 0 auto;
+    }
+    .nav-brand {
+      display: flex; align-items: center; gap: 10px;
+      font-weight: 700; font-size: 17px; letter-spacing: -0.5px;
+    }
+    .nav-brand .hourglass {
+      display: inline-flex;
+      width: 32px; height: 32px;
+      align-items: center; justify-content: center;
+      background: linear-gradient(135deg, var(--gold), var(--rose));
+      border-radius: 8px;
+      font-size: 17px;
+      color: var(--bg);
+    }
+    .nav-cta {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 9px 16px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--bg);
+      border-radius: 999px;
+      font-weight: 700; font-size: 14px;
+      text-decoration: none;
+      transition: transform 0.2s;
+    }
+    .nav-cta:hover { transform: translateY(-1px); }
+
+    /* HERO */
+    .hero {
+      padding: 140px 0 80px;
+      position: relative;
+      text-align: center;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201, 169, 97, 0.18) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 30% 80%, rgba(212, 117, 107, 0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 60%, rgba(107, 212, 218, 0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .eyebrow {
+      display: inline-block;
+      font-size: 11px; font-weight: 800;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(40px, 7vw, 76px);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -1.5px;
+      background: linear-gradient(180deg, var(--cream) 0%, #C9A961 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 24px;
+    }
+    .hero-sub {
+      font-size: clamp(16px, 2.2vw, 20px);
+      color: var(--text-2);
+      max-width: 640px;
+      margin: 0 auto 40px;
+    }
+    .badges {
+      display: inline-flex; gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 12px;
+    }
+    .badge-app {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 12px 22px;
+      background: var(--bg-2);
+      border: 1px solid var(--divider);
+      border-radius: 14px;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    .badge-app:hover { background: var(--bg-3); transform: translateY(-2px); }
+    .badge-app .icon { font-size: 24px; }
+    .badge-app .label { display: flex; flex-direction: column; line-height: 1.1; align-items: flex-start; }
+    .badge-app .label small { font-size: 10px; color: var(--text-3); }
+
+    /* PHONE MOCKUP */
+    .phone-mockup {
+      margin: 60px auto 0;
+      width: 280px; height: 580px;
+      background: var(--bg-3);
+      border-radius: 44px;
+      padding: 12px;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.06),
+        0 30px 80px rgba(0,0,0,0.6),
+        0 0 100px rgba(201, 169, 97, 0.18);
+      position: relative;
+    }
+    .phone-mockup::before {
+      content: '';
+      position: absolute; top: 18px; left: 50%; transform: translateX(-50%);
+      width: 110px; height: 28px;
+      background: var(--bg);
+      border-radius: 14px;
+    }
+    .phone-screen {
+      width: 100%; height: 100%;
+      background: linear-gradient(170deg, #1A1208 0%, #0F0A08 50%, #1A0F0C 100%);
+      border-radius: 32px;
+      padding: 60px 18px 18px;
+      display: flex; flex-direction: column;
+      gap: 12px;
+    }
+    .ps-hero {
+      flex: 1;
+      background: linear-gradient(135deg, rgba(201,169,97,0.25), rgba(212,117,107,0.25));
+      border-radius: 16px;
+      border: 1px solid rgba(201,169,97,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 60px;
+      color: var(--gold);
+    }
+    .ps-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+      height: 200px;
+    }
+    .ps-tile {
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px;
+    }
+    .ps-tile:nth-child(1) { background: linear-gradient(135deg, #C9A961, #6B4520); color: #0F0A08; }
+    .ps-tile:nth-child(2) { background: linear-gradient(135deg, #B5482E, #4A1E10); color: #fff; }
+    .ps-tile:nth-child(3) { background: linear-gradient(135deg, #6BD4DA, #2A4A75); color: #fff; }
+    .ps-tile:nth-child(4) { background: linear-gradient(135deg, #D4756B, #4A1E18); color: #fff; }
+
+    /* SECTIONS */
+    section { padding: 100px 0; position: relative; }
+    section:nth-of-type(even) { background: var(--bg-2); }
+    .section-header { text-align: center; max-width: 720px; margin: 0 auto 60px; }
+    h2 {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(32px, 5vw, 50px);
+      font-weight: 700;
+      letter-spacing: -1px;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .section-sub { font-size: 17px; color: var(--text-2); }
+
+    /* FEATURES */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .feature {
+      background: var(--bg-2);
+      border: 1px solid var(--divider);
+      border-radius: 24px;
+      padding: 32px 28px;
+      transition: all 0.3s;
+    }
+    section:nth-of-type(even) .feature { background: var(--bg); }
+    .feature:hover {
+      transform: translateY(-4px);
+      border-color: var(--gold);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+    .feature-icon {
+      width: 48px; height: 48px;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, var(--gold), var(--rose));
+      border-radius: 14px;
+      font-size: 22px;
+      color: var(--bg);
+      margin-bottom: 18px;
+    }
+    .feature h3 {
+      font-size: 19px; font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .feature p {
+      font-size: 14px; color: var(--text-2);
+    }
+
+    /* ERA GALLERY */
+    .era-strip {
+      display: flex; gap: 14px;
+      overflow-x: auto;
+      padding: 20px 0 30px;
+      scrollbar-width: none;
+    }
+    .era-strip::-webkit-scrollbar { display: none; }
+    .era-card {
+      flex: 0 0 160px;
+      height: 220px;
+      border-radius: 18px;
+      padding: 18px;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      color: white;
+      font-weight: 700;
+    }
+    .era-card .year { font-size: 11px; opacity: 0.8; letter-spacing: 1.2px; }
+    .era-card .name { font-size: 17px; }
+
+    /* HOW IT WORKS */
+    .how-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 28px;
+    }
+    .step {
+      text-align: center;
+      padding: 32px 24px;
+    }
+    .step-num {
+      display: inline-flex;
+      width: 56px; height: 56px;
+      align-items: center; justify-content: center;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--bg);
+      border-radius: 50%;
+      font-family: "Playfair Display", serif;
+      font-size: 26px; font-weight: 700;
+      margin-bottom: 18px;
+      box-shadow: 0 0 30px rgba(201, 169, 97, 0.4);
+    }
+    .step h3 { font-size: 19px; margin-bottom: 6px; }
+    .step p { color: var(--text-2); font-size: 14px; }
+
+    /* FAQ */
+    .faq-item {
+      border-bottom: 1px solid var(--divider);
+      padding: 22px 0;
+      cursor: pointer;
+    }
+    .faq-item summary {
+      list-style: none;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 17px; font-weight: 600;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after {
+      content: '+'; font-size: 24px; color: var(--gold);
+      transition: transform 0.3s;
+    }
+    .faq-item[open] summary::after { transform: rotate(45deg); }
+    .faq-item .answer { margin-top: 14px; color: var(--text-2); font-size: 15px; line-height: 1.7; }
+
+    /* CTA */
+    .cta-section {
+      text-align: center;
+      padding: 120px 0;
+      background:
+        radial-gradient(ellipse at center, rgba(201,169,97,0.15), transparent 70%),
+        var(--bg);
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 50px 0 40px;
+      border-top: 1px solid var(--divider);
+      text-align: center;
+      color: var(--text-3);
+      font-size: 13px;
+    }
+    footer a { color: var(--text-2); text-decoration: none; margin: 0 12px; }
+    footer a:hover { color: var(--gold); }
+    .footer-brand {
+      font-family: "Playfair Display", serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--cream);
+      margin-bottom: 8px;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    .phone-mockup { animation: float 6s ease-in-out infinite; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-brand" style="text-decoration:none; color:inherit;">
+        <span class="hourglass">⌛</span>
+        AI Time Machine
+      </a>
+      <a href="#notify" class="nav-cta">Notify Me</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="container">
+      <div class="eyebrow">Cinematic AI · Photo & Video</div>
+      <h1>Travel Through Time<br />With One Photo.</h1>
+      <p class="hero-sub">
+        See yourself as an Egyptian pharaoh, a 1920s flapper, a Mars colonist —
+        or watch yourself age from 20 to 100 in seconds. Powered by prestige-quality AI.
+      </p>
+
+      <div class="badges" id="notify">
+        <span class="badge-app" style="cursor:default;">
+          <span class="icon">⏳</span>
+          <span class="label"><small>Coming soon to the</small><strong>App Store</strong></span>
+        </span>
+        <a class="badge-app" href="mailto:support@aitimemachine.app?subject=Notify%20me%20when%20AI%20Time%20Machine%20launches">
+          <span class="icon">✉️</span>
+          <span class="label"><small>Get notified at</small><strong>Launch</strong></span>
+        </a>
+      </div>
+
+      <div class="phone-mockup" aria-hidden="true">
+        <div class="phone-screen">
+          <div class="ps-hero">⌛</div>
+          <div class="ps-grid">
+            <div class="ps-tile">🏛️</div>
+            <div class="ps-tile">🤠</div>
+            <div class="ps-tile">🚀</div>
+            <div class="ps-tile">📷</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- FEATURES -->
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <div class="eyebrow">What you can do</div>
+        <h2>One photo. Every era.</h2>
+        <p class="section-sub">From baby photos to year 3000 — your face, photo-real, in every century.</p>
+      </div>
+
+      <div class="features">
+        <div class="feature">
+          <div class="feature-icon">⌛</div>
+          <h3>Aging Journey</h3>
+          <p>See yourself at every life stage from baby to centenarian — and watch the transformation as a video.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🏛️</div>
+          <h3>Historical Eras</h3>
+          <p>Live as a pharaoh, gladiator, Viking, samurai, Victorian, or Wild West outlaw. 30+ historical roles.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🚀</div>
+          <h3>Future Worlds</h3>
+          <p>Cyberpunk 2099, Mars colonist, post-apocalyptic survivor, or utopian citizen of year 3000.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🎬</div>
+          <h3>Cinematic Videos</h3>
+          <p>Aging timelapses, decade transitions, "message from your future self" — videos built to share.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">📷</div>
+          <h3>Vintage Photo Styles</h3>
+          <p>1850s daguerreotype, 1920s sepia, 90s yearbook, 80s mall glamour shot. Pure nostalgia.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">❤️</div>
+          <h3>Family & Love</h3>
+          <p>You and your partner aging together. Future baby. Three generations side-by-side. Even your pet through time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ERA SHOWCASE -->
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <div class="eyebrow">The Time Axis</div>
+        <h2>Pick your century.</h2>
+        <p class="section-sub">A curated journey from antiquity to the far future.</p>
+      </div>
+
+      <div class="era-strip">
+        <div class="era-card" style="background: linear-gradient(180deg, #D9A943, #5C3F12);"><div class="year">1300 BCE</div><div class="name">Ancient Egypt</div></div>
+        <div class="era-card" style="background: linear-gradient(180deg, #B5905D, #3F2418);"><div class="year">50 BCE</div><div class="name">Roma</div></div>
+        <div class="era-card" style="background: linear-gradient(180deg, #758090, #2E3848);"><div class="year">900 CE</div><div class="name">Viking</div></div>
+        <div class="era-card" style="background: linear-gradient(180deg, #B23B3B, #4A1414);"><div class="year">1600</div><div class="name">Samurai</div></div>
+        <div class="era-card" style="background: linear-gradient(180deg, #8A6680, #2F1A28);"><div class="year">1885</div><div class="name">Victorian</div></div>
+        <div class="era-card" style="background: linear-gradient(180deg, #CC7F45, #5A2618);"><div class="year">1875</div><div class="name">Wild West</div></div>
+        <div class="era-card" style="background: linear-gradient(180deg, #B58D48, #3F2418);"><div class="year">1925</div><div class="name">1920s Gatsby</div></div>
+        <div class="era-card" style="background: linear-gradient(180deg, #E04AA0, #4A1A4A);"><div class="year">1975</div><div class="name">70s Disco</div></div>
+        <div class="era-card" style="background: linear-gradient(180deg, #E84A99, #2F50D6);"><div class="year">1985</div><div class="name">80s Neon</div></div>
+        <div class="era-card" style="background: linear-gradient(180deg, #4ECFD3, #1E2E70);"><div class="year">2099</div><div class="name">Cyberpunk</div></div>
+        <div class="era-card" style="background: linear-gradient(180deg, #D97045, #5A2118);"><div class="year">2090</div><div class="name">Mars</div></div>
+        <div class="era-card" style="background: linear-gradient(180deg, #7ED2F0, #2F6A90);"><div class="year">3000</div><div class="name">Utopia</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section>
+    <div class="container">
+      <div class="section-header">
+        <div class="eyebrow">How it works</div>
+        <h2>Three steps. Sixty seconds.</h2>
+      </div>
+
+      <div class="how-steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>Pick an Era</h3>
+          <p>From baby photos to Mars 2090 — choose your destination on the Time Axis.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>Upload a Photo</h3>
+          <p>One clear selfie. Our AI maps your face and preserves your identity across every transformation.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>Travel & Share</h3>
+          <p>Cinematic result in seconds. Save, share, or reshape with the before/after slider.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section>
+    <div class="container" style="max-width:780px;">
+      <div class="section-header">
+        <div class="eyebrow">FAQ</div>
+        <h2>Questions, answered.</h2>
+      </div>
+
+      <details class="faq-item">
+        <summary>Is my photo safe?</summary>
+        <div class="answer">Yes. We don't sell or share your photos. Uploaded images are processed solely to generate your transformation and are not used to train AI models. Read more in our <a href="privacy-policy.html" style="color:var(--gold)">Privacy Policy</a>.</div>
+      </details>
+      <details class="faq-item">
+        <summary>How much does it cost?</summary>
+        <div class="answer">New users get 3 free credits to try the app. After that, choose a weekly, monthly, or yearly subscription, or buy one-time credit packs. Yearly is our best value (60% off vs weekly).</div>
+      </details>
+      <details class="faq-item">
+        <summary>Do you require an account?</summary>
+        <div class="answer">No login screen, no email — you're anonymous from the first tap. Your credits and history sync via a private anonymous ID.</div>
+      </details>
+      <details class="faq-item">
+        <summary>How long does each generation take?</summary>
+        <div class="answer">Photos typically render in 15–45 seconds. Videos take 1–3 minutes depending on the model (Veo, Kling, or Sora). Pro subscribers get priority queue.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Can I cancel my subscription?</summary>
+        <div class="answer">Yes — cancel anytime from your iPhone Settings → Apple ID → Subscriptions. No retention pressure, no hoops.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Does it work for pets too?</summary>
+        <div class="answer">Yes — there's a dedicated Pets category. Age your dog/cat gracefully, see them as an Egyptian royal companion, and more.</div>
+      </details>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>Your face. Every era.<br />Cinematic AI.</h2>
+      <p class="section-sub" style="margin-bottom:36px;">Launching soon on iOS. Be first to know.</p>
+      <div class="badges">
+        <span class="badge-app" style="cursor:default;">
+          <span class="icon">⏳</span>
+          <span class="label"><small>Coming soon to the</small><strong>App Store</strong></span>
+        </span>
+        <a class="badge-app" href="mailto:support@aitimemachine.app?subject=Notify%20me%20when%20AI%20Time%20Machine%20launches">
+          <span class="icon">✉️</span>
+          <span class="label"><small>Get notified at</small><strong>Launch</strong></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-brand">AI Time Machine</div>
+      <p>Travel through time. © 2026</p>
+      <p style="margin-top:14px;">
+        <a href="privacy-policy.html">Privacy</a>
+        <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/">Terms</a>
+        <a href="mailto:support@aitimemachine.app">Support</a>
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>
