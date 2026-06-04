@@ -289,6 +289,18 @@
             </ul>
             <p>AI generation does not proceed until you accept. You can withdraw your consent at any time by deleting your account (<strong>Profile → Delete account</strong>), which permanently removes your consent record and all associated data.</p>
 
+            <h3>4.7 Community (User-Generated Content)</h3>
+            <p>The App includes an optional <strong>Community</strong> feed where users can voluntarily share creations they generated in the App so that others can discover styles and try them. Sharing is entirely optional — nothing is published unless you tap "Share to Community."</p>
+            <ul>
+                <li><strong>What is shared:</strong> only the AI-generated photo or video you choose to share, plus non-personal metadata (the style name, the prompt used, and your anonymous user ID). We do not reveal your name, email, or any directly identifying information — accounts are anonymous.</li>
+                <li><strong>Where it is stored:</strong> shared media files are stored on <strong>Cloudflare R2</strong> object storage and delivered via Cloudflare's CDN; post metadata is stored in our Firebase Firestore database.</li>
+                <li><strong>Visibility:</strong> shared posts are publicly visible to other users of the App inside the Community feed.</li>
+                <li><strong>Your control:</strong> you can delete any of your own posts at any time from the Community feed ("My Posts"). Deleting your account also removes your posts.</li>
+            </ul>
+            <div class="warning-box">
+                <p style="margin-bottom: 0;"><strong>Zero tolerance for objectionable content.</strong> Before posting, you must agree to our Community Guidelines. Every post includes a <strong>Report</strong> option and an option to <strong>Block</strong> the poster. Reported content is reviewed and removed if it violates our rules, and content reaching a report threshold is automatically hidden. We aim to act on reports of objectionable content within 24 hours. Users who post offensive, explicit, or abusive content may be banned. To report content or a user, use the in-App report control or contact <a href="mailto:timemachine.app.support@gmail.com">timemachine.app.support@gmail.com</a>.</p>
+            </div>
+
             <h2>5. Data Retention</h2>
 
             <table class="retention-table">
@@ -309,6 +321,11 @@
                         <td>Generated content (gallery)</td>
                         <td>Until you delete your account</td>
                         <td>Delete in-App or delete account</td>
+                    </tr>
+                    <tr>
+                        <td>Community posts (shared media)</td>
+                        <td>Until you delete the post or your account, or it is removed for violating rules</td>
+                        <td>Community → My Posts → Delete, or report-based removal</td>
                     </tr>
                     <tr>
                         <td>Anonymous user account</td>
